@@ -1,2 +1,2 @@
 # Case Study
-## Applying the transcriptogramer package (http://bioconductor.org/packages/release/bioc/html/transcriptogramer.html) to microarray datasets of human colorectal adenocarcinoma cells, HT-29, treated with different concentrations of 5-aza-deoxy-cytidine (GSE41364).
+## Applying the transcriptogramer package (https://doi.org/doi:10.18129/B9.bioc.transcriptogramer) to microarray datasets of human colorectal adenocarcinoma cells, HT-29, treated with different concentrations of 5-aza-deoxy-cytidine (GSE41364).
