@@ -2,7 +2,6 @@
 source("https://bioconductor.org/biocLite.R")
 biocLite("transcriptogramer")
 
-
 # Load package
 library(transcriptogramer)
 
@@ -22,3 +21,8 @@ t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.02,
 rdp <- clusterVisualization(t)
 terms <- clusterEnrichment(t, species = "Homo sapiens", nCores = T,
                            algorithm = "parentchild", pValue = 0.05)
+terms <- terms[order(terms$pValue),]
+top5terms <- lapply(1:4, function(i){
+  head(terms[terms$ClusterNumber == i, c(1, 2, 6)], 5)
+})
+top5terms
