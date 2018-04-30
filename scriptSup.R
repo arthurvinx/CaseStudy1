@@ -16,7 +16,7 @@ t <- transcriptogramStep1(object = t, expression = exp[, c(1:3, 7:9)],
 t <- transcriptogramStep2(object = t)
 levels <- c(rep(TRUE, 3), rep(FALSE, 3))
 t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.02,
-                             title = "aza0 x aza10 Microarray",
+                             title = "aza10 x aza0 Microarray",
                              species = "Homo sapiens")
 rdp <- clusterVisualization(t)
 terms <- clusterEnrichment(t, species = "Homo sapiens", nCores = T,
