@@ -13,14 +13,14 @@ load("data.RData")
 # Run the analysis ####
 t <- transcriptogramPreprocess(association = edges, ordering = Hs800,
                                radius = 125)
-groups <- c(rep("aza0", 3), rep("aza5", 3), rep("aza10", 3))
-idx <- groups %in% (c("aza0", "aza10"))
+groups <- c(rep("control", 3), rep("aza5", 3), rep("aza10", 3))
+idx <- groups %in% (c("control", "aza10"))
 t <- transcriptogramStep1(object = t, expression = exp[, idx],
                           dictionary = GPL570)
 t <- transcriptogramStep2(object = t)
-levels <- groups[idx] %in% "aza0"
+levels <- groups[idx] %in% "control"
 t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.02,
-                             title = "aza10 x aza0 Microarray",
+                             title = "aza10 x control Microarray",
                              species = "Homo sapiens",
                              boundaryConditions = FALSE)
 rdp <- clusterVisualization(t, onlyGenesInDE = TRUE)
