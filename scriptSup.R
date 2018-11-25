@@ -20,7 +20,7 @@ t <- transcriptogramStep1(object = t, expression = exp[, idx],
 t <- transcriptogramStep2(object = t)
 levels <- groups[idx] %in% "control"
 t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.02,
-                             title = "aza10 x control Microarray",
+                             title = "aza10 x control (Microarray)",
                              species = "Homo sapiens",
                              boundaryConditions = FALSE)
 rdp <- clusterVisualization(t, onlyGenesInDE = TRUE)
