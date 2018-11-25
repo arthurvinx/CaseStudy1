@@ -1,27 +1,33 @@
-# Install package
-source("https://bioconductor.org/biocLite.R")
-biocLite("transcriptogramer")
+# Install the package ####
+if (!requireNamespace("BiocManager", quietly = TRUE)){
+  install.packages("BiocManager")
+}
+BiocManager::install("transcriptogramer", version = BiocManager::version())
 
-# Load package
+# Load the package ####
 library(transcriptogramer)
 
-# Load data
+# Load the required data ####
 load("data.RData")
 
-# Run analysis
+# Run the analysis ####
 t <- transcriptogramPreprocess(association = edges, ordering = Hs800,
                                radius = 125)
-t <- transcriptogramStep1(object = t, expression = exp[, c(1:3, 7:9)],
+groups <- c(rep("aza0", 3), rep("aza5", 3), rep("aza10", 3))
+idx <- groups %in% (c("aza0", "aza10"))
+t <- transcriptogramStep1(object = t, expression = exp[, idx],
                           dictionary = GPL570)
 t <- transcriptogramStep2(object = t)
-levels <- c(rep(TRUE, 3), rep(FALSE, 3))
+levels <- groups[idx] %in% "aza0"
 t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.02,
                              title = "aza10 x aza0 Microarray",
-                             species = "Homo sapiens")
-rdp <- clusterVisualization(t)
-terms <- clusterEnrichment(t, species = "Homo sapiens", nCores = T,
-                           algorithm = "parentchild", pValue = 0.05)
-terms <- terms[order(terms$pValue),]
+                             species = "Homo sapiens",
+                             boundaryConditions = FALSE)
+rdp <- clusterVisualization(t, onlyGenesInDE = TRUE)
+t <- clusterEnrichment(t, species = "Homo sapiens", nCores = TRUE,
+                           algorithm = "parentchild", pValue = 0.05,
+                           onlyGenesInDE = TRUE)
+terms <- Terms(t)
 top5terms <- lapply(1:4, function(i){
   head(terms[terms$ClusterNumber == i, c(1, 2, 6)], 5)
 })
