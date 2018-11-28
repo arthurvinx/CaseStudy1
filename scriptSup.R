@@ -1,3 +1,5 @@
+# Some arguments have been changed due to package updates
+
 # Install the package ####
 if (!requireNamespace("BiocManager", quietly = TRUE)){
   install.packages("BiocManager")
@@ -19,7 +21,7 @@ t <- transcriptogramStep1(object = t, expression = exp[, idx],
                           dictionary = GPL570)
 t <- transcriptogramStep2(object = t)
 levels <- groups[idx] %in% "control"
-t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.02,
+t <- differentiallyExpressed(object = t, levels = levels, pValue = 0.022,
                              title = "aza10 x aza0 (Microarray)",
                              species = "Homo sapiens",
                              boundaryConditions = FALSE)
